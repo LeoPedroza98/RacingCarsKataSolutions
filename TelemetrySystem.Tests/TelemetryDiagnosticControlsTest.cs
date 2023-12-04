@@ -18,7 +18,7 @@ namespace TDDMicroExercises.TelemetrySystem.Tests
         }
 
         [Fact]
-        public void CheckTransmission_should_send_a_diagnostic_message_and_receive_a_status_message_response()
+        public void CheckTransmission_deverá_enviar_uma_mensagem_diagnóstica_e_receber_uma_resposta_de_mensagem_de_status()
         {
             // Arrange
             var telemetryControl = new TelemetryDiagnosticControls();
@@ -32,7 +32,7 @@ namespace TDDMicroExercises.TelemetrySystem.Tests
         }
 
         [Fact]
-        public void CheckTransmission_WithDiagnosticCommand_ShouldReturnDiagnosticInfo()
+        public void CheckTransmission_ComComandoDiagnóstico_DeveRetornarInformaçõesDiagnósticas()
         {
             // Arrange
             var expected = "expected return";
@@ -52,7 +52,7 @@ namespace TDDMicroExercises.TelemetrySystem.Tests
         }
 
         [Fact]
-        public void CheckTransmission_WithFailToConnect_ShouldThrow()
+        public void CheckTransmission_ComFalhaDeConexão_DeveLançarExceção()
         {
             // Arrange
             var expectedMessage = "Unable to connect.";

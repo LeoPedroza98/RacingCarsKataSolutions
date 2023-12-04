@@ -20,7 +20,7 @@ namespace TDDMicroExercises.TelemetrySystem.Tests
         /// Testa a conexão bem-sucedida com uma string de conexão válida.
         /// </summary>
         [Fact]
-        public void Connect_WithValidConnectionString_ShouldSuccessfullyConnect()
+        public void Conectar_ComCadeiaDeConexãoVálida_DeveConectarComSucesso()
         {
             // Act
             _eventsSimulator.Setup(x => x.CanConnect()).Returns(true);
@@ -34,7 +34,7 @@ namespace TDDMicroExercises.TelemetrySystem.Tests
         /// Testa a tentativa de conexão com uma string de conexão inválida, esperando uma exceção.
         /// </summary>
         [Fact]
-        public void Connect_WithInValidConnectionString_ShouldThrow()
+        public void Conectar_ComCadeiaDeConexãoInválida_DeveLançarExceção()
         {
             // Act & Assert
             Should.Throw<ArgumentNullException>(() => _sut.Connect(string.Empty));
@@ -44,7 +44,7 @@ namespace TDDMicroExercises.TelemetrySystem.Tests
         /// Testa a desconexão bem-sucedida após uma conexão válida.
         /// </summary>
         [Fact]
-        public void Disconnect_ShouldSuccessfullyDisconnect()
+        public void Desconectar_DeveDesconectarComSucesso()
         {
             // Arrange
             _eventsSimulator.Setup(x => x.CanConnect()).Returns(true);
@@ -62,13 +62,13 @@ namespace TDDMicroExercises.TelemetrySystem.Tests
         /// Testa o envio bem-sucedido de uma mensagem após uma conexão válida.
         /// </summary>
         [Fact]
-        public void Send_WithValidComment_ShouldSuccessfullyCreateAMessage()
+        public void Enviar_ComComentárioVálido_DeveCriarUmaMensagemComSucesso()
         {
             // Arrange
             _eventsSimulator.Setup(x => x.CanConnect()).Returns(true);
             _sut.Connect("anyConnection");
             _sut.OnlineStatus.ShouldBeTrue();
-            var expectedMessage = ExpectedDiagnosticMessage();
+            var expectedMessage = MensagemDiagnósticaEsperada();
 
             // Act
             _sut.Send(TelemetryClient.DiagnosticMessage);
@@ -83,7 +83,7 @@ namespace TDDMicroExercises.TelemetrySystem.Tests
         /// Testa a tentativa de envio de uma mensagem com uma string de conexão inválida, esperando uma exceção.
         /// </summary>
         [Fact]
-        public void Send_WithInValidConnectionString_ShouldThrow()
+        public void Enviar_ComCadeiaDeConexãoInválida_DeveLançarExceção()
         {
             // Act & Assert
             Should.Throw<ArgumentNullException>(() => _sut.Send(string.Empty));
@@ -93,7 +93,7 @@ namespace TDDMicroExercises.TelemetrySystem.Tests
         /// Testa se o método Receive retorna uma mensagem diferente daquela enviada.
         /// </summary>
         [Fact]
-        public void Receive_SendWithDifferentMessage_ShouldReturnRandomMessage()
+        public void Receber_EnviarComMensagemDiferente_DeveRetornarMensagemAleatória()
         {
             // Arrange
             var expectedMessage = "Believe_And_Work_Hard";
@@ -112,7 +112,7 @@ namespace TDDMicroExercises.TelemetrySystem.Tests
         /// Método utilitário para obter uma mensagem de diagnóstico esperada.
         /// </summary>
         /// <returns>Mensagem de diagnóstico esperada.</returns>
-        private static string ExpectedDiagnosticMessage()
+        private static string MensagemDiagnósticaEsperada()
         {
             var expectedMessage =
                     "LAST TX rate................ 100 MBPS\r\n"
